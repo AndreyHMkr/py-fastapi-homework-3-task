@@ -57,7 +57,7 @@ async def register_user(
         activation_token = ActivationTokenModel(user=user)
         db.add(activation_token)
         await db.commit()
-        return user
+        return UserRegistrationResponseSchema.model_validate(user)
     except Exception:
         raise HTTPException(
             status_code=500,
